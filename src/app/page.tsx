@@ -1,6 +1,6 @@
 import MainNews from '@/components/MainNews';
 import Marquee from '@/components/Marquee';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 const HomePage = async () => {
 
@@ -18,7 +18,7 @@ const HomePage = async () => {
 
   return (
     <div>
-      <Suspense>
+      <Suspense fallback="Loading...">
         <Marquee></Marquee>
       </Suspense>
 
@@ -26,7 +26,9 @@ const HomePage = async () => {
 
         {/* News section */}
         <div className='col-span-2'>
-          <MainNews news={mainNews}></MainNews>
+          <Suspense fallback="Loading...">
+            <MainNews news={mainNews}></MainNews>
+          </Suspense>
         </div>
 
         {/* Most read section */}
