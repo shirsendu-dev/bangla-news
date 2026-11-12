@@ -1,10 +1,41 @@
-import React from 'react';
+import MainNews from '@/components/MainNews';
+import Marquee from '@/components/Marquee';
+import React, { Suspense } from 'react';
 
-const HomePage = () => {
+const HomePage = async () => {
+
+  const res = await fetch('https://news-api-v2.vercel.app/api/news/sections');
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data...');
+  }
+
+  const data = await res.json();
+  const sections = data.data;
+  const mainNews = sections[0].articles;
+
+  console.log(mainNews);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans">
-      <h2>Home Page</h2>
-      <p>বাংলাদেশে নিজস্ব ভাষায় কৃত্রিম বুদ্ধিমত্তা বা এআই মডেল তৈরির বিষয়টি নিয়ে নানা আলোচনা হচ্ছে। কিন্তু এই পরিকল্পনা বাস্তবায়ন করতে যে বিনিয়োগ এবং অবকাঠামো সক্ষমতা প্রয়োজন সেটি বাংলাদেশের আছে কিনা- সেই প্রশ্নটি সামনে আসছে। </p>
+    <div>
+      <Suspense>
+        <Marquee></Marquee>
+      </Suspense>
+
+      <div className='grid grid-cols-3 mx-auto container py-10'>
+
+        {/* News section */}
+        <div className='col-span-2'>
+          <MainNews news={mainNews}></MainNews>
+        </div>
+
+        {/* Most read section */}
+        <div className='col-span-1'>
+
+        </div>
+
+      </div>
+
     </div>
   );
 };
