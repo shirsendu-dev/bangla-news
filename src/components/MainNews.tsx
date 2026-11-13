@@ -23,7 +23,7 @@ const MainNews = ({ news } : {news:News[]}) => {
                 <figure>
                     <Image
                         src={firstNews.imageUrl}
-                        className='w-full'
+                        className='w-full image-full'
                         width={500}
                         height={500}
                         alt={firstNews.imageAlt} />
@@ -42,7 +42,7 @@ const MainNews = ({ news } : {news:News[]}) => {
 
                         <div 
                         key={singleOtherNews.id}
-                        className='card bg-base-100 w-full shadow-sm py-3 px-4'
+                        className='card bg-base-100 shadow-sm py-3 px-4'
                         >
                             <div className='flex flex-col justify-between gap-4'>
                                 <p className='text-red-700 font-bold text-[15px]'>{singleOtherNews.category}</p>
