@@ -1,6 +1,8 @@
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
+export const instant = false;
+
 interface Headlines {
     id: string;
     title: string;
@@ -25,7 +27,7 @@ const Marquee = async () => {
                 <div className="min-w-0 flex-1 overflow-hidden">
                     <MarqueeText
                         duration={20}
-                        pauseOnHover={true}
+                        pauseOnHover={false}
                         direction="right"
                     >
                         <div className="flex whitespace-nowrap">

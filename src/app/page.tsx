@@ -4,6 +4,8 @@ import MostRead from '@/components/MostRead';
 import OtherNewsCard from '@/components/OtherNewsCard';
 import { Suspense } from 'react';
 
+export const instant = false;
+
 interface IOtherSection {
   curationId: string,
   title: string,
@@ -35,10 +37,7 @@ const HomePage = async () => {
   return (
 
     <div>
-      <Suspense fallback="Loading...">
-        <Marquee></Marquee>
-      </Suspense>
-
+      
       <div className='grid grid-cols-3 mx-auto container py-10 gap-4'>
 
         {/* News section */}
