@@ -4,6 +4,7 @@ import "./globals.css";
 import NavHeader from "@/components/NavHeader";
 import Marquee from "@/components/Marquee";
 import { Suspense } from "react";
+import Footer from "@/components/Footer";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin", 'bengali'],
@@ -30,7 +31,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Suspense>
 
         {children}
+        <Suspense fallback="Loading, Please wait...">
+          <Footer></Footer>
+        </Suspense>
       </body>
-    </html>
+    </html >
   );
 }
