@@ -34,7 +34,7 @@ const Marquee = async () => {
                         <div className="flex whitespace-nowrap">
                             {headlines.map((headline) => (
                                 <span key={headline.id}>
-                                    <Link href={`/news/${headline.id}`} className="hover:underline">
+                                    <Link href={`/news/${headline.id}`} className="text-[18px] hover:underline">
                                         {headline.title}
                                     </Link>
                                     <span className="mx-5">⬩</span>

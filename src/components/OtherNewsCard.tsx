@@ -19,7 +19,7 @@ const OtherNewsCard = ({ article }: { article: INews }) => {
             <div className="card bg-base-100 w-full h-full shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
                 {/* Image */}
-                <figure className="relative aspect-[16/9] w-full overflow-hidden">
+                <figure className="relative aspect-video w-full overflow-hidden">
                     <Image
                         src={article.imageUrl}
                         fill
