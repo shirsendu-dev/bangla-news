@@ -26,7 +26,7 @@ const MainNews = ({ news }: { news: News[] }) => {
                     <figure className="overflow-hidden">
                         <Image
                             src={firstNews.imageUrl}
-                            className="w-full transition-transform duration-500 group-hover:scale-105"
+                            className="object-contain transition-transform duration-500 group-hover:scale-105"
                             width={500}
                             height={500}
                             alt={firstNews.imageAlt}

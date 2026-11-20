@@ -23,7 +23,7 @@ const OtherNewsCard = ({ article }: { article: INews }) => {
                     <Image
                         src={article.imageUrl}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
                         alt={article.imageAlt}
                     />
                 </figure>
