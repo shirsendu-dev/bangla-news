@@ -1,34 +1,51 @@
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
 
 interface INews {
-    id: string,
-    title: string,
-    description: string,
-    category: string,
-    imageUrl: string,
-    imageAlt: string,
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    imageUrl: string;
+    imageAlt: string;
 }
 
-const OtherNewsCard = ({article} : {article:INews}) => {
+const OtherNewsCard = ({ article }: { article: INews }) => {
     return (
-        <div>
-            <div className="card bg-base-100 w-full shadow-sm">
-                <figure>
+        <Link
+            href={`/news/${article.id}`}
+            className="group block h-full"
+        >
+            <div className="card bg-base-100 w-full h-full shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+
+                {/* Image */}
+                <figure className="relative aspect-[16/9] w-full overflow-hidden">
                     <Image
                         src={article.imageUrl}
-                        className='w-full image-full'
-                        width={500}
-                        height={500}
-                        alt={article.imageAlt} />
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt={article.imageAlt}
+                    />
                 </figure>
 
-                <div className="card-body">
-                    <p className='font-bold text-red-700 text-[16px]'>{article.category}</p>
-                    <h2 className="card-title text-[22px]">{article.title}</h2>
-                    <p>{article.description}</p>
+                {/* Content */}
+                <div className="card-body flex flex-1 flex-col">
+
+                    <p className="font-bold text-red-700 text-[16px]">
+                        {article.category}
+                    </p>
+
+                    <h2 className="card-title text-[22px] leading-snug line-clamp-2 transition-colors duration-300 group-hover:text-red-700">
+                        {article.title}
+                    </h2>
+
+                    <p className="text-gray-700 line-clamp-3">
+                        {article.description}
+                    </p>
+
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

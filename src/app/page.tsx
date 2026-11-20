@@ -1,5 +1,4 @@
 import MainNews from '@/components/MainNews';
-import Marquee from '@/components/Marquee';
 import MostRead from '@/components/MostRead';
 import OtherNewsCard from '@/components/OtherNewsCard';
 import { Suspense } from 'react';
@@ -37,7 +36,7 @@ const HomePage = async () => {
   return (
 
     <div>
-      
+
       <div className='grid grid-cols-3 mx-auto container py-10 gap-4'>
 
         {/* News section */}
@@ -73,7 +72,7 @@ const HomePage = async () => {
 
         {/* Most read section */}
         <div className='col-span-1'>
-            <MostRead></MostRead>
+          <MostRead></MostRead>
         </div>
 
       </div>

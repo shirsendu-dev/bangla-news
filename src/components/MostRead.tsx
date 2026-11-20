@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface MostReadNews {
     id: string,
     title: string,
@@ -15,16 +17,17 @@ const MostRead = async () => {
                 {
                     mostReadNews.map(news =>
 
-                        <div
+                        <Link
+                            href={`/news/${news.id}`}
                             key={news.id}
-                            className="flex gap-4"
+                            className="flex gap-4 px-5 hover:text-red-700"
 
                         >
-                            <p className="text-[20px] font-bold text-red-700">{news.rank}</p>
+                            <p className="text-[20px] font-semibold text-red-700">{news.rank.toLocaleString('bn-BD')}</p>
                             <h3 className="text-[18px] font-medium">
                                 {news.title}
                             </h3>
-                        </div>
+                        </Link>
                     )
                 }
             </div>

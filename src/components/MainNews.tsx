@@ -1,57 +1,79 @@
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import Link from "next/link";
 
 interface News {
-    id: string,
-    title: string,
-    description:string,
-    category: string,
-    imageUrl: string,
-    imageAlt: string,
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    imageUrl: string;
+    imageAlt: string;
 }
 
-const MainNews = ({ news } : {news:News[]}) => {
-    // const firstNews = news[0];
-    // const otherNews = news.slice(1);
-
-    const [firstNews, ...otherNews] = news
+const MainNews = ({ news }: { news: News[] }) => {
+    const [firstNews, ...otherNews] = news;
 
     return (
-        <div className='flex gap-5 justify-start'>
+        <div className="flex flex-col lg:flex-row gap-5 justify-start">
+
             {/* First News */}
-            <div className="card bg-base-100 w-full shadow-sm">
-                <figure>
-                    <Image
-                        src={firstNews.imageUrl}
-                        className='w-full image-full'
-                        width={500}
-                        height={500}
-                        alt={firstNews.imageAlt} />
-                </figure>
+            <Link
+                href={`/news/${firstNews.id}`}
+                className="group block flex-1"
+            >
+                <div className="card bg-base-100 w-full h-full shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
-                <div className="card-body">
-                    <p className='font-bold text-red-700 text-[16px]'>{firstNews.category}</p>
-                    <h2 className="card-title text-[22px]">{firstNews.title}</h2>
-                    <p>{firstNews.description}</p>
+                    <figure className="overflow-hidden">
+                        <Image
+                            src={firstNews.imageUrl}
+                            className="w-full transition-transform duration-500 group-hover:scale-105"
+                            width={500}
+                            height={500}
+                            alt={firstNews.imageAlt}
+                        />
+                    </figure>
+
+                    <div className="card-body">
+                        <p className="font-bold text-red-700 text-[16px]">
+                            {firstNews.category}
+                        </p>
+
+                        <h2 className="card-title text-[22px] transition-colors duration-300 group-hover:text-red-700">
+                            {firstNews.title}
+                        </h2>
+
+                        <p className="text-gray-700">
+                            {firstNews.description}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </Link>
 
-            {/* other news */}
-            <div className='grid gap-2'>
-                {otherNews.slice(0,4).map(singleOtherNews =>
+            {/* Other News */}
+            <div className="grid gap-3 flex-1">
 
-                        <div 
+                {otherNews.slice(0, 4).map(singleOtherNews => (
+                    <Link
+                        href={`/news/${singleOtherNews.id}`}
                         key={singleOtherNews.id}
-                        className='card bg-base-100 shadow-sm py-3 px-4'
-                        >
-                            <div className='flex flex-col justify-between gap-4'>
-                                <p className='text-red-700 font-bold text-[15px]'>{singleOtherNews.category}</p>
-                                <h2 className='font-bold'>{singleOtherNews.title}</h2>
-                            </div>
+                        className="group card bg-base-100 shadow-sm py-3 px-4 border border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-red-100"
+                    >
+                        <div className="flex flex-col justify-between gap-2">
+
+                            <p className="text-red-700 font-bold text-[15px]">
+                                {singleOtherNews.category}
+                            </p>
+
+                            <h2 className="font-bold leading-relaxed transition-colors duration-300 group-hover:text-red-700">
+                                {singleOtherNews.title}
+                            </h2>
+
                         </div>
-                    )
-                }
+                    </Link>
+                ))}
+
             </div>
+
         </div>
     );
 };

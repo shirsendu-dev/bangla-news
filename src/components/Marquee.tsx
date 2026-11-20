@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
@@ -27,13 +28,15 @@ const Marquee = async () => {
                 <div className="min-w-0 flex-1 overflow-hidden">
                     <MarqueeText
                         duration={20}
-                        pauseOnHover={false}
+                        pauseOnHover={true}
                         direction="right"
                     >
                         <div className="flex whitespace-nowrap">
                             {headlines.map((headline) => (
                                 <span key={headline.id}>
-                                    {headline.title}
+                                    <Link href={`/news/${headline.id}`} className="hover:underline">
+                                        {headline.title}
+                                    </Link>
                                     <span className="mx-5">⬩</span>
                                 </span>
                             ))}

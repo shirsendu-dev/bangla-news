@@ -12,7 +12,7 @@ interface News {
     imageAlt: string,
 }
 
-const CategoryNews = async ({ params }:{params:{categoryId:string}}) => {
+const CategoryNews = async ({ params }: { params: { categoryId: string } }) => {
 
     const { categoryId } = await params;
 
@@ -21,19 +21,16 @@ const CategoryNews = async ({ params }:{params:{categoryId:string}}) => {
 
     const categoryNews: News[] = data.data;
 
-    console.log(categoryNews);
-
-
     return (
         <div>
-            <div className="bg-red-700 py-5">
-                <div className="container mx-auto">
-                    <h1 className="text-3xl text-white text-center font-bold">{data.title}</h1>
+            <div className=" py-8">
+                <div className="container mx-auto border-b-2 border-red-700">
+                    <h2 className="text-2xl text-red-700 font-bold pb-2">{`${data.title}`}</h2>
                 </div>
             </div>
 
             <div className="container mx-auto">
-                <div className="grid grid-cols-4 gap-4 py-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pb-5">
                     {
                         categoryNews.map(news =>
                             <CategoryNewsCard key={news.id} news={news}></CategoryNewsCard>
