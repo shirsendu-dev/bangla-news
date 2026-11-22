@@ -3,7 +3,7 @@ import NavLinks from "./NavLinks";
 
 const Footer = () => {
     return (
-        <footer className="mt-16 bg-[#111111] text-gray-300">
+        <footer className=" bg-[#111111] text-gray-300">
 
             {/* Top red border */}
             <div className="h-1 bg-red-700" />
