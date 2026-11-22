@@ -31,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Suspense>
 
         {children}
+        
         <Suspense fallback="Loading, Please wait...">
           <Footer></Footer>
         </Suspense>
