@@ -13,7 +13,7 @@ const notoSerifBengali = Noto_Serif_Bengali({
 
 
 export const metadata: Metadata = {
-  title: "Bangla Bulletin News",
+  title: "Bangla News Bullentin",
   description: "NextJs app by SB Shaon",
 };
 
@@ -25,16 +25,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSerifBengali.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" cz-shortcut-listen="true">
-        <Suspense fallback="Loading, Please wait...">
-          <NavHeader></NavHeader>
-          <Marquee></Marquee>
-        </Suspense>
+
+        <NavHeader></NavHeader>
+        <Marquee></Marquee>
 
         {children}
-        
-        <Suspense fallback="Loading, Please wait...">
-          <Footer></Footer>
-        </Suspense>
+
+        <Footer></Footer>
+
       </body>
     </html >
   );
