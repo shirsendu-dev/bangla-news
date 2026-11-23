@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import CurrentDate from "./CurrentDate";
 import NavLinks from "./NavLinks";
+import UserInfo from "./UserInfo";
 
 const NavHeader = () => {
   return (
@@ -45,21 +46,9 @@ const NavHeader = () => {
           </Link>
 
           {/* Authentication Buttons */}
-          <div className="flex items-center justify-center gap-2 md:justify-end">
-            <Link
-              href="/signin"
-              className="btn btn-ghost btn-sm sm:btn-md"
-            >
-              সাইন ইন
-            </Link>
-
-            <Link
-              href="/signup"
-              className="btn btn-sm border-none bg-red-700 text-white hover:bg-red-800 sm:btn-md"
-            >
-              সাইন আপ
-            </Link>
-          </div>
+          <Suspense fallback='Loading...'>
+            <UserInfo></UserInfo>
+          </Suspense>
         </div>
 
         {/* Navigation */}

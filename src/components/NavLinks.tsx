@@ -34,7 +34,7 @@ const NavLinks = async () => {
           py-4
           text-[16px]
           sm:gap-8 sm:text-[17px]
-          lg:justify-center lg:gap-10 lg:text-[18px]
+          lg:justify-center lg:gap-10 lg:text-[18px] md:justify-center
         "
             >
                 <Link

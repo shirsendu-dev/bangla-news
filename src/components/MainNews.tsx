@@ -56,7 +56,7 @@ const MainNews = ({ news }: { news: News[] }) => {
                     <Link
                         href={`/news/${singleOtherNews.id}`}
                         key={singleOtherNews.id}
-                        className="group card bg-base-100 shadow-sm py-3 px-4 border border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-red-100"
+                        className="group justify-center card bg-base-100 shadow-sm py-3 px-4 border border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-red-100"
                     >
                         <div className="flex flex-col justify-between gap-2">
 

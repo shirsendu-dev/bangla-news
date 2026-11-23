@@ -1,4 +1,9 @@
+'use client';
+
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import {
     FaEnvelope,
     FaImage,
@@ -8,6 +13,29 @@ import {
 } from "react-icons/fa6";
 
 const SignUpPage = () => {
+
+    const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const user = Object.fromEntries(formData.entries()) as { name: string, image: string, email: string, password: string };
+
+        const { data, error } = await authClient.signUp.email({
+            ...user,
+            callbackURL: '/',
+        })
+
+        if (data) {
+            toast.success('আপনার সাইন আপ সফল হয়েছে')
+            console.log(data);
+            redirect('/')
+        }
+        if (error) {
+             toast.error(error?.message as string);
+            console.log(error);
+        }
+    };
+
     return (
         <main className="bg-gray-50 py-12 sm:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +58,7 @@ const SignUpPage = () => {
                     {/* Form Card */}
                     <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
 
-                        <form>
+                        <form onSubmit={onSubmit}>
                             <fieldset className="space-y-5">
 
                                 {/* Name */}
@@ -121,7 +149,7 @@ const SignUpPage = () => {
                                     </label>
                                 </div>
 
-                                {/* Submit */}
+                                {/* Submit button */}
                                 <button
                                     type="submit"
                                     className="btn mt-2 w-full border-none bg-red-700 text-white shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#111111] hover:shadow-md"

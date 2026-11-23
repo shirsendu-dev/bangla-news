@@ -11,8 +11,16 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ichef.bbci.co.uk'
-      }
+        hostname: 'ichef.bbci.co.uk',
+      },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co.com',
+      },
     ]
   },
   

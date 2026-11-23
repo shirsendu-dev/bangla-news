@@ -1,5 +1,7 @@
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import FooterYear from "./FooterYear";
+import { Suspense } from "react";
 
 const Footer = () => {
     return (
@@ -35,7 +37,7 @@ const Footer = () => {
                             সংবাদ বিভাগ
                         </h3>
 
-                        <div className="footer-nav">
+                        <div className="footer-nav flex flex-col justify-center items-end">
                             <NavLinks />
                         </div>
 
@@ -49,10 +51,9 @@ const Footer = () => {
             <div className="border-t border-gray-800">
 
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row gap-2 justify-between items-center text-sm text-gray-500">
-
-                    <p>
-                        © {new Date().getFullYear()} Bangla News Bulletin
-                    </p>
+                    <Suspense fallback="Loading...">
+                        <FooterYear></FooterYear>
+                    </Suspense>
 
                     <p>
                         সর্বস্বত্ব সংরক্ষিত
