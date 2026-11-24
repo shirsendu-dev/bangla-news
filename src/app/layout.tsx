@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
-import NavHeader from "@/components/NavHeader";
-import Marquee from "@/components/Marquee";
-import Footer from "@/components/Footer";
+
 
 import { setServers } from "node:dns/promises";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
+import NavHeader from "@/components/NavHeader";
+import Marquee from "@/components/Marquee";
+import Footer from "@/components/Footer";
 setServers(["1.1.1.1", "8.8.8.8"]);
 
 const notoSerifBengali = Noto_Serif_Bengali({
