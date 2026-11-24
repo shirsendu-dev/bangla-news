@@ -1,44 +1,79 @@
-// import CategoryNewsCard from "@/components/CategoryNewsCard";
 import CategoryNewsCard from "@/components/CategoryNewsCard";
 
 export const instant = false;
 
 interface News {
-    id: string,
-    title: string,
-    description: string,
-    category: string,
-    imageUrl: string,
-    imageAlt: string,
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    imageUrl: string;
+    imageAlt: string;
 }
 
-const CategoryNews = async ({ params }: { params: { categoryId: string } }) => {
-
+const CategoryNews = async ({
+    params,
+}: {
+    params: { categoryId: string };
+}) => {
     const { categoryId } = await params;
 
-    const res = await fetch(`https://news-api-v2.vercel.app/api/category/${categoryId}`);
+    const res = await fetch(
+        `https://news-api-v2.vercel.app/api/category/${categoryId}`
+    );
+
     const data = await res.json();
 
     const categoryNews: News[] = data.data;
 
     return (
-        <div>
-            <div className=" py-8">
-                <div className="container mx-auto border-b-2 border-red-700">
-                    <h2 className="text-2xl text-red-700 font-bold pb-2">{`${data.title}`}</h2>
+        <main className="bg-gray-50">
+
+            {/* Category Heading */}
+            <div className="py-6 sm:py-8">
+                <div className="container mx-auto px-3 sm:px-6 lg:px-0">
+
+                    <div className="border-b border-gray-200">
+
+                        <h2 className="relative inline-block pb-3 text-2xl font-bold text-gray-900 sm:text-3xl">
+
+                            {data.title}
+
+                            <span className="absolute bottom-[-1px] left-0 h-[3px] w-full bg-red-700" />
+
+                        </h2>
+
+                    </div>
+
                 </div>
             </div>
 
-            <div className="container mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pb-5">
-                    {
-                        categoryNews.map(news =>
-                            <CategoryNewsCard key={news.id} news={news}></CategoryNewsCard>
-                        )
-                    }
+            {/* News Cards */}
+            <div className="container mx-auto px-3 sm:px-6 lg:px-0">
+
+                <div
+                    className="
+                        grid
+                        grid-cols-2
+                        gap-3
+                        pb-8
+                        md:grid-cols-3
+                        md:gap-4
+                        xl:grid-cols-4
+                        xl:gap-5
+                    "
+                >
+                    {categoryNews.map((news) => (
+                        <CategoryNewsCard
+                            key={news.id}
+                            news={news}
+                        />
+                    ))}
                 </div>
+
             </div>
-        </div>
+
+        </main>
     );
 };
 

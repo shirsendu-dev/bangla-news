@@ -14,55 +14,92 @@ const CategoryNewsCard = ({ news }: { news: ICategoryNews }) => {
     return (
         <Link
             href={`/news/${news.id}`}
-            className="group block h-full"
+            className="group block min-w-0 h-full"
         >
-            <div className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-lg">
-
+            <article
+                className="
+                    flex
+                    min-w-0
+                    h-full
+                    flex-col
+                    overflow-hidden
+                    rounded-lg
+                    border
+                    border-gray-200
+                    bg-white
+                    shadow-sm
+                    transition-all
+                    duration-300
+                    hover:-translate-y-1
+                    hover:border-red-200
+                    hover:shadow-lg
+                    sm:rounded-xl
+                "
+            >
                 {/* Image */}
-                <div className="relative aspect-video w-full overflow-hidden bg-gray-50">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
                     <Image
                         src={news.imageUrl}
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-contain transition-transform duration-500 group-hover:scale-105"
-                        alt={news.imageAlt}
+                        sizes="
+                            (max-width: 767px) 50vw,
+                            (max-width: 1023px) 33vw,
+                            25vw
+                        "
+                        alt={news.imageAlt || news.title}
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex min-w-0 flex-1 flex-col p-2.5 sm:p-4 lg:p-5">
 
-                    <p className="mb-2 text-[16px] font-bold text-red-700">
+                    {/* Category */}
+                    <p className="mb-1 text-[10px] font-bold text-red-700 sm:mb-2 sm:text-[13px] lg:text-[14px]">
                         {news.category}
                     </p>
 
                     {/* Title */}
                     <h2
                         className="
-                            -mx-1
-                            mb-3
-                            px-1
-                            py-1
-                            text-[21px]
-                            font-semibold
-                            leading-[1.6]
                             line-clamp-2
+                            min-w-0
+                            py-0.5
+                            text-[12px]
+                            font-bold
+                            leading-[1.7]
+                            text-gray-900
                             transition-colors
                             duration-300
                             group-hover:text-red-700
+                            sm:text-[16px]
+                            lg:text-[19px]
                         "
                     >
                         {news.title}
                     </h2>
 
                     {/* Description */}
-                    <p className="text-[15px] leading-7 text-gray-700 line-clamp-3">
+                    <p
+                        className="
+                            mt-1.5
+                            line-clamp-2
+                            min-w-0
+                            text-[10px]
+                            leading-[1.7]
+                            text-gray-600
+                            sm:mt-2
+                            sm:text-[13px]
+                            sm:leading-6
+                            lg:line-clamp-3
+                            lg:text-[14px]
+                            lg:leading-7
+                        "
+                    >
                         {news.description}
                     </p>
-
                 </div>
-
-            </div>
+            </article>
         </Link>
     );
 };

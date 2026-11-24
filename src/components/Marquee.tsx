@@ -14,38 +14,98 @@ const Marquee = async () => {
         "https://news-api-v2.vercel.app/api/news?limit=10"
     );
 
+    if (!res.ok) {
+        throw new Error("Failed to fetch latest headlines");
+    }
+
     const data = await res.json();
+
     const headlines: Headlines[] = data.data;
 
     return (
-        <div className="bg-red-600 text-white">
-            <div className="container mx-auto flex items-center overflow-hidden">
+        <section
+            className="bg-red-600 text-white"
+            aria-label="সর্বশেষ সংবাদ"
+        >
+            <div className="container mx-auto flex min-h-10 items-stretch overflow-hidden sm:min-h-11 lg:min-h-12">
 
-                <div className="shrink-0 bg-red-700 px-4 py-2">
-                    <p>সর্বশেষ</p>
+                {/* Latest Label */}
+                <div className="relative z-10 flex shrink-0 items-center bg-red-800 px-2.5 sm:px-4 lg:px-5">
+
+                    <span
+                        className="
+                            whitespace-nowrap
+                            text-[11px]
+                            font-bold
+                            leading-none
+                            sm:text-[13px]
+                            lg:text-[14px]
+                        "
+                    >
+                        সর্বশেষ
+                    </span>
+
                 </div>
 
-                <div className="min-w-0 flex-1 overflow-hidden">
+                {/* Marquee */}
+                <div className="flex min-w-0 flex-1 items-center overflow-hidden">
+
                     <MarqueeText
-                        duration={20}
+                        duration={24}
                         pauseOnHover={true}
                         direction="right"
                     >
-                        <div className="flex whitespace-nowrap">
+                        <div className="flex min-w-max items-center whitespace-nowrap">
+
                             {headlines.map((headline) => (
-                                <span key={headline.id}>
-                                    <Link href={`/news/${headline.id}`} className="text-[18px] hover:underline">
+                                <div
+                                    key={headline.id}
+                                    className="flex items-center"
+                                >
+
+                                    <Link
+                                        href={`/news/${headline.id}`}
+                                        className="
+                                            py-2
+                                            text-[12px]
+                                            font-medium
+                                            leading-6
+                                            transition-opacity
+                                            duration-200
+                                            hover:opacity-80
+                                            hover:underline
+                                            sm:text-[14px]
+                                            lg:text-[15px]
+                                        "
+                                    >
                                         {headline.title}
                                     </Link>
-                                    <span className="mx-5">⬩</span>
-                                </span>
+
+                                    {/* Separator */}
+                                    <span
+                                        className="
+                                            mx-3
+                                            text-[9px]
+                                            text-red-200
+                                            sm:mx-5
+                                            sm:text-[10px]
+                                            lg:mx-6
+                                        "
+                                        aria-hidden="true"
+                                    >
+                                        ◆
+                                    </span>
+
+                                </div>
                             ))}
+
                         </div>
                     </MarqueeText>
+
                 </div>
 
             </div>
-        </div>
+        </section>
     );
 };
 
