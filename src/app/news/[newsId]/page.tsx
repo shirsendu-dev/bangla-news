@@ -50,7 +50,6 @@ const NewsDetailsPage = async ({
 
     // If response exists but data.data doesn't
     if (!data?.data) {
-        console.log("Invalid article response:", data);
         notFound();
     }
 
