@@ -29,7 +29,7 @@ const NavHeader = () => {
             />
 
             <div>
-              <h1 className="text-xl font-semibold text-red-600 sm:text-2xl">
+              <h1 className="text-2xl font-semibold text-red-600 sm:text-[20px]">
                 Bangla News Bulletin
               </h1>
 

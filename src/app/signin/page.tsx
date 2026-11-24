@@ -1,37 +1,71 @@
-'use client';
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
     FaEnvelope,
+    FaGithub,
+    FaGoogle,
     FaLock,
     FaRightToBracket,
 } from "react-icons/fa6";
 
 const SignInPage = () => {
+    const router = useRouter();
 
-    const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-        const user = Object.fromEntries(formData.entries()) as { email: string, password: string };
+        const formData = new FormData(e.currentTarget);
+
+        const user = Object.fromEntries(formData.entries()) as {
+            email: string;
+            password: string;
+        };
 
         const { data, error } = await authClient.signIn.email({
             ...user,
-            callbackURL: '/'
-        })
+            callbackURL: "/",
+        });
 
-        if(data){
-            toast.success('আপনার সাইন ইন সফল হয়েছে')
-            console.log(data);
+        if (error) {
+            toast.error(error.message || "সাইন ইন করা সম্ভব হয়নি");
+            return;
         }
-        if(error){
-            toast.error(error?.message as string);
-            console.log(error);
-            
+
+        if (data) {
+            toast.success("আপনার সাইন ইন সফল হয়েছে");
+            router.push("/");
         }
-    }
+    };
+
+    const handleGoogleSignin = async () => {
+        const { error } = await authClient.signIn.social({
+            provider: "google",
+            callbackURL: "/",
+        });
+
+        if (error) {
+            toast.error(
+                error.message || "Google দিয়ে সাইন ইন করা সম্ভব হয়নি"
+            );
+        }
+    };
+
+    const handleGithubSignin = async () => {
+        const { error } = await authClient.signIn.social({
+            provider: "github",
+            callbackURL: "/",
+        });
+
+        if (error) {
+            toast.error(
+                error.message || "GitHub দিয়ে সাইন ইন করা সম্ভব হয়নি"
+            );
+        }
+    };
 
     return (
         <main className="bg-gray-50 py-12 sm:py-16">
@@ -55,6 +89,7 @@ const SignInPage = () => {
                     {/* Form Card */}
                     <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
 
+                        {/* Email Sign In Form */}
                         <form onSubmit={onSubmit}>
                             <fieldset className="space-y-5">
 
@@ -75,7 +110,9 @@ const SignInPage = () => {
                                             name="email"
                                             type="email"
                                             placeholder="আপনার ইমেইল লিখুন"
+                                            autoComplete="email"
                                             className="grow"
+                                            required
                                         />
                                     </label>
                                 </div>
@@ -97,7 +134,9 @@ const SignInPage = () => {
                                             name="password"
                                             type="password"
                                             placeholder="আপনার পাসওয়ার্ড লিখুন"
+                                            autoComplete="current-password"
                                             className="grow"
+                                            required
                                         />
                                     </label>
                                 </div>
@@ -124,6 +163,48 @@ const SignInPage = () => {
 
                             </fieldset>
                         </form>
+
+                        {/* Divider */}
+                        <div className="my-6 flex items-center gap-4">
+                            <div className="h-px flex-1 bg-gray-200" />
+
+                            <span className="text-sm text-gray-400">
+                                অথবা
+                            </span>
+
+                            <div className="h-px flex-1 bg-gray-200" />
+                        </div>
+
+                        {/* Social Authentication */}
+                        <div className="space-y-3">
+
+                            {/* Google */}
+                            <button
+                                type="button"
+                                onClick={handleGoogleSignin}
+                                className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-700 hover:text-red-700 hover:shadow-md"
+                            >
+                                <FaGoogle className="text-xl text-red-600" />
+
+                                <span>
+                                    Google দিয়ে চালিয়ে যান
+                                </span>
+                            </button>
+
+                            {/* GitHub */}
+                            <button
+                                type="button"
+                                onClick={handleGithubSignin}
+                                className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-gray-900 hover:bg-gray-900 hover:text-white hover:shadow-md"
+                            >
+                                <FaGithub className="text-xl" />
+
+                                <span>
+                                    GitHub দিয়ে চালিয়ে যান
+                                </span>
+                            </button>
+
+                        </div>
 
                     </div>
 

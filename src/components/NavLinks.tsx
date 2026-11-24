@@ -32,9 +32,10 @@ const NavLinks = async () => {
           flex items-center gap-6
           overflow-x-auto whitespace-nowrap
           py-4
-          text-[16px]
+          text-[15px]
+          font-bold
           sm:gap-8 sm:text-[17px]
-          lg:justify-center lg:gap-10 lg:text-[18px] md:justify-center
+          lg:justify-center lg:gap-10 lg:text-[16px] md:justify-center
         "
             >
                 <Link

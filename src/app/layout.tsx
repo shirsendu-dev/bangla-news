@@ -17,7 +17,7 @@ const notoSerifBengali = Noto_Serif_Bengali({
 
 
 export const metadata: Metadata = {
-  title: "Bangla News Bullentin",
+  title: "Bangla News Bulletin",
   description: "NextJs app by SB Shaon",
 };
 
